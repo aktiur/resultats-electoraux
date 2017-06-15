@@ -1,0 +1,7 @@
+{
+  "sources": {
+    "2017-presidentielle-2": "https://www.data.gouv.fr/s/resources/election-presidentielle-des-23-avril-et-7-mai-2017-resultats-definitifs-du-2nd-tour-par-bureaux-de-vote/20170511-093541/PR17_BVot_T2_FE.txt",
+    "2017-presidentielle-1": "https://www.data.gouv.fr/s/resources/election-presidentielle-des-23-avril-et-7-mai-2017-resultats-definitifs-du-1er-tour-par-bureaux-de-vote/20170427-100955/PR17_BVot_T1_FE.txt",
+    "2017-legislatives-1": "https://www.data.gouv.fr/s/resources/elections-legislatives-des-11-et-18-juin-2017-resultats-par-bureaux-de-vote-du-1er-tour/20170613-100441/Leg_2017_Resultats_BVT_T1_c.txt"
+  }
+}
