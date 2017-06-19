@@ -23,7 +23,7 @@ headers_correct = {
     'Exprimés': 'exprimes',
     '% Exp/Ins': None,
     '% Exp/Vot': None,
-    'N°Panneau': None,
+    'N°Panneau': 'numero_panneau',
     'Sexe': 'sexe',
     'Nom': 'nom',
     'Prénom': 'prenom',

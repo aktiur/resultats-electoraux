@@ -4,10 +4,10 @@ import json
 
 
 RULE = """
-{target}: DL_{target} |dist/raw
+{target}: DL_{target}
 
-.PHONY: DL_{target}
-DL_{target}:
+.PHONY: DL_{target} 
+DL_{target}: |dist/raw
 \tif [ -e "{target}" ]; then curl -o "{target}" -z "{target}" "{url}"; else curl -o "{target}" "{url}"; fi 
 """
 
