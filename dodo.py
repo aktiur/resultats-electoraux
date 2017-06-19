@@ -28,7 +28,7 @@ def get_dist_filename(format, unit, scrutin):
     return os.path.join('dist', format, unit, scrutin + '.csv')
 
 
-def task_telecharger_sources():
+def task_telecharger_source():
     for scrutin, url in config['sources'].items():
         filename = get_raw_filename(scrutin)
         action = ['curl', '-o', filename, url]
@@ -43,8 +43,8 @@ def task_telecharger_sources():
         }
 
 
-def creer_long_par_bureau():
-    for format, scrutin in config['sources']:
+def task_long_par_bureau():
+    for scrutin in config['sources']:
         src_filename = get_raw_filename(scrutin)
         dest_filename = get_dist_filename('long', 'bureau', scrutin)
 
@@ -61,7 +61,7 @@ def creer_long_par_bureau():
         }
 
 
-def task_creer_large_par_bureau():
+def task_large_par_bureau():
     for scrutin in config['sources']:
         src_filename = get_dist_filename('long', 'bureau', scrutin)
         dest_filename = get_dist_filename('large', 'bureau', scrutin)
@@ -78,7 +78,7 @@ def task_creer_large_par_bureau():
         }
 
 
-def task_creer_par_commune():
+def task_par_commune():
     for format, scrutin in product(FORMATS, config['sources']):
         src_filename = get_dist_filename(format, 'bureau', scrutin)
         dest_filename = get_dist_filename(format, 'commune', scrutin)
@@ -91,7 +91,7 @@ def task_creer_par_commune():
         )
 
         yield {
-            'basename': 'creer_{}_par_commune'.format(format),
+            'basename': '{}_par_commune'.format(format),
             'name': scrutin,
             'targets': [dest_filename],
             'file_dep': [src_filename],
