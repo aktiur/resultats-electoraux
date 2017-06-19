@@ -3,15 +3,20 @@ import numpy as np
 import sys
 
 
+NON_SUMMABLE = {'circonscription', 'numero_panneau'}
+
+
 def aggregate(input, agg_columns, keep_columns, output):
     df = pd.read_csv(input, dtype={'departement': str, 'commune': str, 'bureau': str})
 
     res = df.groupby(agg_columns).agg({
         **{c: 'first' for c in keep_columns if c in df.columns},
-        **{c: 'sum' for c in df.select_dtypes([np.number]).columns if c != 'circonscription'}
-    })
+        **{c: 'sum' for c in df.select_dtypes([np.number]).columns if c not in NON_SUMMABLE}
+    }).reset_index()
 
-    res.to_csv(output)
+    # garder l'ordre original des colonnes
+    order = [c for c in df.columns if c in res.columns]
+    res.reindex(columns=order).to_csv(output, index=False)
 
 
 if __name__ == '__main__':
