@@ -1,3 +1,4 @@
 dist/
 build/
 .doit.db
+__pychache__

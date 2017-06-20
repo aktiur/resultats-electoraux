@@ -1,6 +1,15 @@
-import json
 import os
 from itertools import product
+
+SOURCES = {
+    "2017-presidentielle-2": "https://www.data.gouv.fr/s/resources/election-presidentielle-des-23-avril-et-7-mai-2017-resultats-definitifs-du-2nd-tour-par-bureaux-de-vote/20170511-093541/PR17_BVot_T2_FE.txt",
+    "2017-presidentielle-1": "https://www.data.gouv.fr/s/resources/election-presidentielle-des-23-avril-et-7-mai-2017-resultats-definitifs-du-1er-tour-par-bureaux-de-vote/20170427-100955/PR17_BVot_T1_FE.txt",
+    "2017-legislatives-1": "https://www.data.gouv.fr/s/resources/elections-legislatives-des-11-et-18-juin-2017-resultats-par-bureaux-de-vote-du-1er-tour/20170613-100441/Leg_2017_Resultats_BVT_T1_c.txt",
+    "2017-legislatives-2": "https://www.data.gouv.fr/s/resources/elections-legislatives-des-11-et-18-juin-2017-resultats-du-2nd-tour-par-bureaux-de-vote/20170620-094954/Leg_2017_Resultats_BVT_T2_c.txt",
+    # "2014-municipales": "https://www.data.gouv.fr/s/resources/elections-municipales-2014-resultats-par-bureaux-de-vote/20150925-122128/MN14_Bvot_T1T2.txt"
+}
+
+SCRUTINS = list(SOURCES)
 
 FORMATS = ['long', 'large']
 UNITS = ['commune', 'circonscription', 'departement']
@@ -19,9 +28,6 @@ KEEP_COLS = {
 
 CANDIDAT_AGG = ('numero_panneau', 'nom')
 CANDIDAT_KEEP = ('sexe', 'prenom', 'genre', 'nuance')
-
-with open('config.json') as f:
-    config = json.load(f)
 
 
 def get_raw_filename(scrutin):
@@ -42,7 +48,7 @@ def task_creer_dossiers():
 
 
 def task_telecharger_source():
-    for scrutin, url in config['sources'].items():
+    for scrutin, url in SOURCES.items():
         filename = get_raw_filename(scrutin)
         action = ['curl', '-o', filename, url]
 
@@ -57,7 +63,7 @@ def task_telecharger_source():
 
 
 def task_long_par_bureau():
-    for scrutin in config['sources']:
+    for scrutin in SCRUTINS:
         src_filename = get_raw_filename(scrutin)
         dest_filename = get_dist_filename('long', 'bureau', scrutin)
 
@@ -75,7 +81,7 @@ def task_long_par_bureau():
 
 
 def task_large_par_bureau():
-    for scrutin in config['sources']:
+    for scrutin in SCRUTINS:
         src_filename = get_dist_filename('long', 'bureau', scrutin)
         dest_filename = get_dist_filename('large', 'bureau', scrutin)
 
@@ -92,7 +98,7 @@ def task_large_par_bureau():
 
 
 def task_par_commune():
-    for format, unit, scrutin in product(FORMATS, UNITS, config['sources']):
+    for format, unit, scrutin in product(FORMATS, UNITS, SCRUTINS):
         src_filename = get_dist_filename(format, 'bureau', scrutin)
         dest_filename = get_dist_filename(format, unit, scrutin)
 
