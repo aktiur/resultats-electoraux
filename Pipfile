@@ -1,0 +1,15 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+black = "==19.3b0"
+
+[packages]
+doit = "==0.31.*"
+pandas = "==0.24.*"
+numpy = "==1.16.*"
+
+[requires]
+python_version = "3.7"
