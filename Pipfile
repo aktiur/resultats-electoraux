@@ -10,6 +10,7 @@ black = "==19.3b0"
 doit = "==0.31.*"
 pandas = "==0.24.*"
 numpy = "==1.16.*"
+quilt = "==3.*"
 
 [requires]
 python_version = "3.7"

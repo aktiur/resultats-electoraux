@@ -3,3 +3,4 @@ build/
 .doit.db*
 __pycache__
 .idea/
+.env
