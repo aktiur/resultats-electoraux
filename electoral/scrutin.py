@@ -10,7 +10,7 @@ class Scrutin:
     cleaner: Callable[[str, str], List[str]]
 
     def raw_filename(self):
-        return Path("dist") / "raw" / (self.id + ".txt")
+        return self.id + ".txt"
 
     def dist_filename(self, format, unit):
-        return Path("dist") / "data" / f"{self.id}_par_{unit}_{format}.csv"
+        return f"{self.id}_par_{unit}_{format}.csv"

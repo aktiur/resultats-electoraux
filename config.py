@@ -32,7 +32,7 @@ SCRUTINS = [
 
 
 FORMATS = ["long", "large"]
-UNITS = ["commune", "circonscription", "departement"]
+UNITS = ["bureau", "commune", "circonscription", "departement"]
 
 AGG_COLS = {
     "commune": ["departement", "commune"],
