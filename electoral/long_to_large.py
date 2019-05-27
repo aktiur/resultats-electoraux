@@ -4,10 +4,8 @@ import pandas as pd
 def long_to_large(src, dest):
     df = pd.read_csv(src, dtype={"departement": str, "commune": str, "bureau": str})
 
-    with_nuance = "nuance" in df
-
     grouping = ["departement", "commune", "bureau"]
-    col_var = "nuance" if with_nuance else "nom"
+    col_var = next(c for c in ["nuance", "nom", "nom_liste"] if c in df)
     keep_cols = [
         "circonscription",
         "commune_libelle",

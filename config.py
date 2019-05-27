@@ -5,6 +5,11 @@ from electoral.scrutin import Scrutin
 
 SCRUTINS = [
     Scrutin(
+        "2019-europeennes",
+        "https://static.data.gouv.fr/resources/resultats-des-elections-europeennes-2019/20190527-104727/resultats-provisoires-par-bureau-de-vote.txt",
+        clean_results2017,
+    ),
+    Scrutin(
         "2017-presidentielle-2",
         "https://www.data.gouv.fr/s/resources/election-presidentielle-des-23-avril-et-7-mai-2017-resultats-definitifs-du-2nd-tour-par-bureaux-de-vote/20170511-093541/PR17_BVot_T2_FE.txt",
         clean_results2017,
@@ -44,7 +49,7 @@ AGG_COLS = {
 
 KEEP_COLS = {"commune": ("commune_libelle",), "circonscription": (), "departement": ()}
 
-CANDIDAT_AGG = ("numero_panneau", "nom")
+CANDIDAT_AGG = ("numero_panneau", "nom", "nom_liste")
 CANDIDAT_KEEP = ("sexe", "prenom", "genre", "nuance")
 
 

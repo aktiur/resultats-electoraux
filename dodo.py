@@ -81,11 +81,12 @@ def task_fichiers_agreges():
         src_filename = DATA_DIRECTORY / scrutin.dist_filename(format, "bureau")
         dest_filename = DATA_DIRECTORY / scrutin.dist_filename(format, unit)
 
-        agg_cols = list(config.AGG_COLS[unit])
+        unit_agg_columns = list(config.AGG_COLS[unit])
+        additional_agg_columns = []
         keep_cols = list(config.KEEP_COLS[unit])
 
         if format == "long":
-            agg_cols += config.CANDIDAT_AGG
+            additional_agg_columns += config.CANDIDAT_AGG
             keep_cols += config.CANDIDAT_KEEP
 
         action = (
@@ -94,7 +95,8 @@ def task_fichiers_agreges():
             {
                 "src": src_filename,
                 "dest": dest_filename,
-                "agg_columns": agg_cols,
+                "agg_columns": unit_agg_columns,
+                "additional_agg_columns": additional_agg_columns,
                 "keep_columns": keep_cols,
             },
         )
@@ -119,7 +121,7 @@ def task_compress_files_for_release():
     return {
         "basename": "compress_files_for_release",
         "actions": [
-            f'for i in {DATA_DIRECTORY}/*.csv; do gzip --stdout "$i" > "$i.gz"; done'
+            f'for i in {DATA_DIRECTORY}/*.csv; do gzip --stdout "$i" > "{RELEASE_DIRECTORY}/${{i##*/}}.gz"; done'
         ],
         "task_dep": [
             "ensure_dist_directory_exists",

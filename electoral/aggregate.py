@@ -4,11 +4,13 @@ import pandas as pd
 NON_SUMMABLE = {"circonscription", "numero_panneau"}
 
 
-def aggregate(src, agg_columns, keep_columns, dest):
+def aggregate(src, agg_columns, additional_agg_columns, keep_columns, dest):
     df = pd.read_csv(src, dtype={"departement": str, "commune": str, "bureau": str})
 
     if not set(agg_columns) <= set(df.columns):
         return
+
+    agg_columns = agg_columns + [c for c in additional_agg_columns if c in df.columns]
 
     keep_columns = [c for c in keep_columns if c in df.columns]
 
