@@ -3,6 +3,7 @@ from itertools import product
 from pathlib import Path
 
 import config
+from config import RAW_DIRECTORY, DATA_DIRECTORY, RELEASE_DIRECTORY
 from electoral.aggregate import aggregate
 from electoral.long_to_large import long_to_large
 
@@ -14,13 +15,6 @@ def directory_exists(d):
         return False
 
     return uptodate_check
-
-
-ROOT_DIRECTORY = Path(__file__).parent
-
-RAW_DIRECTORY = ROOT_DIRECTORY / Path("build", "raw")
-DATA_DIRECTORY = ROOT_DIRECTORY / Path("build", "data")
-RELEASE_DIRECTORY = ROOT_DIRECTORY / Path("dist")
 
 
 def task_creer_dossiers():

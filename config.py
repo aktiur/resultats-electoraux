@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from electoral.cleanup import clean_results2017, clean_results2014
 from electoral.scrutin import Scrutin
 
@@ -44,3 +46,10 @@ KEEP_COLS = {"commune": ("commune_libelle",), "circonscription": (), "departemen
 
 CANDIDAT_AGG = ("numero_panneau", "nom")
 CANDIDAT_KEEP = ("sexe", "prenom", "genre", "nuance")
+
+
+ROOT_DIRECTORY = Path(__file__).parent
+
+RAW_DIRECTORY = ROOT_DIRECTORY / Path("build", "raw")
+DATA_DIRECTORY = ROOT_DIRECTORY / Path("build", "data")
+RELEASE_DIRECTORY = ROOT_DIRECTORY / Path("dist")
